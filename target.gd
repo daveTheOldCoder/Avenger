@@ -9,6 +9,10 @@ const SPEED: float = 500.0
 
 @onready var sprite: Sprite2D = $Sprite2D
 
+@onready var file_dialog: FileDialog = %FileDialog
+@onready var url_dialog: Popup = %UrlDialog
+@onready var upload_dialog: Control = %UploadDialog
+
 
 func _ready() -> void:
 	position = left_limit
@@ -17,6 +21,11 @@ func _ready() -> void:
 	Events.target_changed.connect(func(t: ImageTexture): sprite.texture = t)
 
 	show()
+
+
+func _process(_delta) -> void:
+	set_physics_process(not (file_dialog.visible or url_dialog.visible\
+			or upload_dialog.visible))
 
 
 func _physics_process(delta: float) -> void:
