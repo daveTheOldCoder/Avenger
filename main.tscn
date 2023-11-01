@@ -1,12 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://bv1tjp7uwnd2t"]
+[gd_scene load_steps=26 format=3 uid="uid://bv1tjp7uwnd2t"]
 
 [ext_resource type="Texture2D" uid="uid://jk4esamjqqta" path="res://icon.svg" id="1_8lvey"]
 [ext_resource type="Texture2D" uid="uid://buf6s6at56ar2" path="res://assets/outline_panorama_vertical_select_black_48dp.png" id="1_qknu3"]
 [ext_resource type="Script" path="res://target.gd" id="2_2vx0f"]
 [ext_resource type="Script" path="res://weapon.gd" id="3_4qij8"]
-[ext_resource type="Script" path="res://open_url.gd" id="3_vpnul"]
-[ext_resource type="Script" path="res://open_file.gd" id="4_evac5"]
+[ext_resource type="Script" path="res://url_button.gd" id="3_vpnul"]
+[ext_resource type="Script" path="res://file_button.gd" id="4_evac5"]
 [ext_resource type="AudioStream" uid="uid://c1u117i2oixcw" path="res://assets/bullet_impact_22.wav" id="4_kkmm3"]
+[ext_resource type="Script" path="res://upload_button.gd" id="4_n271t"]
 [ext_resource type="AudioStream" uid="uid://d287puj0u4b0g" path="res://assets/wilhelm_scream.ogg" id="4_rccg8"]
 [ext_resource type="AudioStream" uid="uid://7qgqxwdwn8cp" path="res://assets/endless-robot-runner.mp3" id="5_5jr1q"]
 [ext_resource type="Script" path="res://attack_sound.gd" id="5_mqyix"]
@@ -19,12 +20,17 @@
 [ext_resource type="Script" path="res://credits_dialog.gd" id="16_dneik"]
 [ext_resource type="Script" path="res://file_dialog.gd" id="18_shnka"]
 [ext_resource type="Script" path="res://url_dialog.gd" id="19_tuk5x"]
+[ext_resource type="Script" path="res://upload_dialog.gd" id="20_1j3np"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jje8v"]
 size = Vector2(128, 128)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycbnv"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_memin"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2pto4"]
 
 [node name="Main" type="Node"]
 
@@ -44,20 +50,28 @@ offset_bottom = 494.0
 text = "Credits"
 script = ExtResource("15_li4kt")
 
-[node name="OpenURL" type="Button" parent="."]
-offset_left = 167.0
+[node name="URLButon" type="Button" parent="."]
+offset_left = 121.0
 offset_top = 463.0
-offset_right = 252.0
+offset_right = 160.0
 offset_bottom = 494.0
-text = "Open URL"
+text = "URL"
 script = ExtResource("3_vpnul")
 
-[node name="OpenFile" type="Button" parent="."]
+[node name="UploadButton" type="Button" parent="."]
+offset_left = 175.0
+offset_top = 464.0
+offset_right = 239.0
+offset_bottom = 495.0
+text = "Upload"
+script = ExtResource("4_n271t")
+
+[node name="FileButton" type="Button" parent="."]
 offset_left = 75.0
 offset_top = 463.0
-offset_right = 156.0
+offset_right = 110.0
 offset_bottom = 494.0
-text = "Open File"
+text = "File"
 script = ExtResource("4_evac5")
 
 [node name="Weapon" type="Sprite2D" parent="."]
@@ -159,12 +173,16 @@ initial_position = 1
 size = Vector2i(630, 500)
 script = ExtResource("18_shnka")
 
-[node name="UrlDialog" type="Popup" parent="."]
+[node name="UrlDialog" type="Panel" parent="."]
 unique_name_in_owner = true
-size = Vector2i(630, 500)
+visible = false
+offset_right = 630.0
+offset_bottom = 500.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_memin")
 script = ExtResource("19_tuk5x")
 
 [node name="Url" type="LineEdit" parent="UrlDialog"]
+layout_mode = 0
 offset_right = 500.0
 offset_bottom = 31.0
 text = "https://www.example.com/image.png"
@@ -172,6 +190,7 @@ virtual_keyboard_type = 7
 clear_button_enabled = true
 
 [node name="UrlBtn" type="Button" parent="UrlDialog"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -182,6 +201,7 @@ text = "Fetch URL"
 alignment = 0
 
 [node name="ImagePreviewLabel" type="Label" parent="UrlDialog"]
+layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_left = 100.0
@@ -194,6 +214,7 @@ text = "Image Preview:"
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="UrlDialog"]
+layout_mode = 0
 offset_left = 251.0
 offset_top = 61.0
 offset_right = 379.0
@@ -204,12 +225,14 @@ color = Color(0, 0, 0, 1)
 position = Vector2(315, 125)
 
 [node name="Message" type="Label" parent="UrlDialog"]
+layout_mode = 0
 offset_top = 200.0
 offset_right = 147.0
 offset_bottom = 226.0
 text = "Message goes here"
 
 [node name="CancelBtn" type="Button" parent="UrlDialog"]
+layout_mode = 0
 offset_left = 200.0
 offset_top = 250.0
 offset_right = 260.0
@@ -217,6 +240,81 @@ offset_bottom = 281.0
 text = "Cancel	"
 
 [node name="OkBtn" type="Button" parent="UrlDialog"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 250.0
+offset_right = 472.0
+offset_bottom = 281.0
+text = "Change Target Image"
+
+[node name="UploadDialog" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_right = 630.0
+offset_bottom = 500.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pto4")
+script = ExtResource("20_1j3np")
+
+[node name="Url" type="LineEdit" parent="UploadDialog"]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 31.0
+text = "https://www.example.com/image.png"
+virtual_keyboard_type = 7
+clear_button_enabled = true
+
+[node name="UrlBtn" type="Button" parent="UploadDialog"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -102.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Fetch URL"
+alignment = 0
+
+[node name="ImagePreviewLabel" type="Label" parent="UploadDialog"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 125.0
+offset_right = 218.0
+offset_bottom = 125.0
+grow_vertical = 2
+size_flags_horizontal = 0
+text = "Image Preview:"
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="UploadDialog"]
+layout_mode = 0
+offset_left = 251.0
+offset_top = 61.0
+offset_right = 379.0
+offset_bottom = 189.0
+color = Color(0, 0, 0, 1)
+
+[node name="ImagePreview" type="Sprite2D" parent="UploadDialog"]
+position = Vector2(315, 125)
+
+[node name="Message" type="Label" parent="UploadDialog"]
+layout_mode = 0
+offset_top = 200.0
+offset_right = 147.0
+offset_bottom = 226.0
+text = "Message goes here"
+
+[node name="CancelBtn" type="Button" parent="UploadDialog"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 250.0
+offset_right = 260.0
+offset_bottom = 281.0
+text = "Cancel	"
+
+[node name="OkBtn" type="Button" parent="UploadDialog"]
+layout_mode = 0
 offset_left = 300.0
 offset_top = 250.0
 offset_right = 472.0
