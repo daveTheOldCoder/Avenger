@@ -254,21 +254,17 @@ offset_bottom = 500.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_2pto4")
 script = ExtResource("20_1j3np")
 
-[node name="Url" type="Label" parent="UploadDialog"]
-layout_mode = 0
-offset_right = 500.0
-offset_bottom = 31.0
-text = "https://www.example.com/image.png"
-
-[node name="UrlBtn" type="Button" parent="UploadDialog"]
+[node name="UploadButton" type="Button" parent="UploadDialog"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -102.0
-offset_bottom = 31.0
+offset_left = -370.0
+offset_top = 4.0
+offset_right = -254.0
+offset_bottom = 35.0
 grow_horizontal = 0
-text = "Fetch URL"
+text = "Upload Image"
 alignment = 0
 
 [node name="ImagePreviewLabel" type="Label" parent="UploadDialog"]
@@ -284,7 +280,7 @@ size_flags_horizontal = 0
 text = "Image Preview:"
 metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="UploadDialog"]
+[node name="PreviewFrame" type="ColorRect" parent="UploadDialog"]
 layout_mode = 0
 offset_left = 251.0
 offset_top = 61.0
@@ -302,18 +298,34 @@ offset_right = 147.0
 offset_bottom = 226.0
 text = "Message goes here"
 
+[node name="FileName" type="Label" parent="UploadDialog"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 233.0
+offset_right = 503.0
+offset_bottom = 264.0
+text = "this_is_the_filename.png"
+
+[node name="FileSize" type="Label" parent="UploadDialog"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 264.0
+offset_right = 501.0
+offset_bottom = 295.0
+text = "1234567890 bytes"
+
 [node name="CancelBtn" type="Button" parent="UploadDialog"]
 layout_mode = 0
-offset_left = 200.0
-offset_top = 250.0
-offset_right = 260.0
-offset_bottom = 281.0
+offset_left = 160.0
+offset_top = 353.0
+offset_right = 220.0
+offset_bottom = 384.0
 text = "Cancel	"
 
 [node name="OkBtn" type="Button" parent="UploadDialog"]
 layout_mode = 0
-offset_left = 300.0
-offset_top = 250.0
-offset_right = 472.0
-offset_bottom = 281.0
+offset_left = 260.0
+offset_top = 353.0
+offset_right = 432.0
+offset_bottom = 384.0
 text = "Change Target Image"

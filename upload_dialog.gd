@@ -6,12 +6,14 @@ extends Panel
 
 var message_flasher: Timer = Timer.new()
 
-@onready var url: Label = $Url
-@onready var upload_button: Button = $UrlBtn
+@onready var upload_button: Button = $UploadButton
+@onready var preview_frame: ColorRect = $PreviewFrame
 @onready var preview: Sprite2D = $ImagePreview
 @onready var message: Label = $Message
-@onready var ok_btn: Button = $OkBtn
+@onready var file_name: Label = $FileName
+@onready var file_size: Label = $FileSize
 @onready var cancel_btn: Button = $CancelBtn
+@onready var ok_btn: Button = $OkBtn
 
 var file_access_web: FileAccessWeb = FileAccessWeb.new()
 
@@ -42,7 +44,10 @@ func _on_visibility_changed() -> void:
 	if visible:
 		print_debug("showing")
 		preview.texture = null
-		message.text = ""
+		message.text = "Uploaded image will be resized to %d x %d pixels."\
+				% [preview_frame.size.x, preview_frame.size.y]
+		file_name.text = ""
+		file_size.text = ""
 		ok_btn.disabled = true
 		message_flasher.start()
 
@@ -54,7 +59,10 @@ func _hide() -> void:
 
 
 func _on_upload_pressed() -> void:
-	message.text = "Uploading..."
+	preview.texture = null
+	message.text = ""
+	file_name.text = ""
+	file_size.text = ""
 	file_access_web.open(IMAGE_TYPE)
 
 
@@ -64,7 +72,7 @@ func _on_progress(current_bytes: int, total_bytes: int) -> void:
 
 
 func _on_file_loaded(_file_name: String, type: String, base64_data: String) -> void:
-	url.text = _file_name
+	file_name.text = _file_name
 	var raw_data: PackedByteArray = Marshalls.base64_to_raw(base64_data)
 	raw_draw(type, raw_data)
 
@@ -77,8 +85,9 @@ func raw_draw(type: String, data: PackedByteArray) -> void:
 		preview.texture = _create_texture_from(image)
 		ok_btn.disabled = false
 	else:
-		message.text = "Error %s" % error
-		push_error("Error %s" % error)
+		var msg: String = "Error %d: %s" % [error, error_string(error)]
+		message.text = msg
+		push_error(msg)
 
 
 func _load_image(image: Image, type: String, data: PackedByteArray) -> Error:
@@ -98,7 +107,7 @@ func _load_image(image: Image, type: String, data: PackedByteArray) -> Error:
 
 
 func _create_texture_from(image: Image) -> ImageTexture:
-	message.text = "Image size: %d bytes" % image.get_data().size()
+	file_size.text = "%d bytes" % image.get_data().size()
 	image.resize(128, 128, Image.Interpolation.INTERPOLATE_CUBIC)
 	var texture = ImageTexture.new()
 	texture.set_image(image)
