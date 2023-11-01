@@ -249,19 +249,16 @@ text = "Change Target Image"
 
 [node name="UploadDialog" type="Panel" parent="."]
 unique_name_in_owner = true
-visible = false
 offset_right = 630.0
 offset_bottom = 500.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_2pto4")
 script = ExtResource("20_1j3np")
 
-[node name="Url" type="LineEdit" parent="UploadDialog"]
+[node name="Url" type="Label" parent="UploadDialog"]
 layout_mode = 0
 offset_right = 500.0
 offset_bottom = 31.0
 text = "https://www.example.com/image.png"
-virtual_keyboard_type = 7
-clear_button_enabled = true
 
 [node name="UrlBtn" type="Button" parent="UploadDialog"]
 layout_mode = 1
