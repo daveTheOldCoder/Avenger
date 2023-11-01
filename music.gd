@@ -1,8 +1,8 @@
 extends AudioStreamPlayer
 
 @onready var file_dialog: FileDialog = %FileDialog
-@onready var url_dialog: Popup = %UrlDialog
-@onready var upload_dialog: Control = %UploadDialog
+@onready var url_dialog: Panel = %UrlDialog
+@onready var upload_dialog: Panel = %UploadDialog
 
 
 func _ready() -> void:

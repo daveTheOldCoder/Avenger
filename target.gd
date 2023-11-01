@@ -10,8 +10,8 @@ const SPEED: float = 500.0
 @onready var sprite: Sprite2D = $Sprite2D
 
 @onready var file_dialog: FileDialog = %FileDialog
-@onready var url_dialog: Popup = %UrlDialog
-@onready var upload_dialog: Control = %UploadDialog
+@onready var url_dialog: Panel = %UrlDialog
+@onready var upload_dialog: Panel = %UploadDialog
 
 
 func _ready() -> void:
