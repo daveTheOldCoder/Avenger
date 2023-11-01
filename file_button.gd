@@ -1,6 +1,6 @@
 extends Button
 
-@onready var dialog: Window = $%FileDialog
+@onready var file_dialog: Window = $%FileDialog
 
 func _ready():
 	focus_mode = Control.FOCUS_NONE
@@ -11,4 +11,4 @@ func _ready():
 		disabled = true
 		return
 
-	pressed.connect(func(): dialog.show())
+	pressed.connect(func(): file_dialog.show())
