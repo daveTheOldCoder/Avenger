@@ -1,4 +1,4 @@
-extends Popup
+extends Panel
 
 var http_request: HTTPRequest = HTTPRequest.new()
 var http_header_regex: RegEx = RegEx.new()
@@ -15,22 +15,16 @@ var message_flasher: Timer = Timer.new()
 func _ready() -> void:
 
 	hide()
-#	unresizable = true
-#	popup_window = true
-#	transient = true
-#	exclusive = true
-#	always_on_top = true
 	url.virtual_keyboard_enabled = true
 	url.virtual_keyboard_type = url.VirtualKeyboardType.KEYBOARD_TYPE_URL
 	url.placeholder_text = "Enter image URL here."
-	about_to_popup.connect(_on_about_to_popup)
+	visibility_changed.connect(_on_visibility_changed)
 	url.text_changed.connect(func(s: String): url_btn.disabled = s.is_empty())
 	url_btn.pressed.connect(func():\
 			message.text = "Fetching..."; fetch_url(url.text.strip_edges()))
 	ok_btn.pressed.connect(func():\
 			Events.target_changed.emit(preview.texture); hide())
 	cancel_btn.pressed.connect(func(): hide())
-	popup_hide.connect(_on_hide)
 
 	http_request.timeout = 10.0
 	http_request.use_threads = true
@@ -65,14 +59,15 @@ func _ready() -> void:
 	assert(regex_err == OK)
 
 
-func _on_about_to_popup() -> void:
-	print_debug("showing")
-	url.text = ""
-	url_btn.disabled = true
-	preview.texture = null
-	message.text = ""
-	ok_btn.disabled = true
-	message_flasher.start()
+func _on_visibility_changed() -> void:
+	if visible:
+		print_debug("showing")
+		url.text = ""
+		url_btn.disabled = true
+		preview.texture = null
+		message.text = ""
+		ok_btn.disabled = true
+		message_flasher.start()
 
 
 func _on_hide() -> void:
