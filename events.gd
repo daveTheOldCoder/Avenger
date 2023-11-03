@@ -5,6 +5,8 @@ signal volume_changed(volume_db: float)
 
 signal target_changed(texture: ImageTexture)
 
+signal target_reset()
+
 signal bullet_fired
 
 signal no_bullet_fired

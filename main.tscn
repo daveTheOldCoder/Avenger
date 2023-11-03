@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bv1tjp7uwnd2t"]
+[gd_scene load_steps=27 format=3 uid="uid://bv1tjp7uwnd2t"]
 
 [ext_resource type="Texture2D" uid="uid://jk4esamjqqta" path="res://icon.svg" id="1_8lvey"]
 [ext_resource type="Texture2D" uid="uid://buf6s6at56ar2" path="res://assets/outline_panorama_vertical_select_black_48dp.png" id="1_qknu3"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://d287puj0u4b0g" path="res://assets/wilhelm_scream.ogg" id="4_rccg8"]
 [ext_resource type="AudioStream" uid="uid://7qgqxwdwn8cp" path="res://assets/endless-robot-runner.mp3" id="5_5jr1q"]
 [ext_resource type="Script" path="res://attack_sound.gd" id="5_mqyix"]
+[ext_resource type="Script" path="res://reset_button.gd" id="6_qjs3n"]
 [ext_resource type="Script" path="res://hit_sound.gd" id="7_0sfxg"]
 [ext_resource type="Script" path="res://music.gd" id="8_jawxe"]
 [ext_resource type="Script" path="res://volume_slider.gd" id="9_i0354"]
@@ -74,6 +75,14 @@ offset_bottom = 494.0
 text = "File"
 script = ExtResource("4_evac5")
 
+[node name="ResetButton" type="Button" parent="."]
+offset_left = 8.0
+offset_top = 353.0
+offset_right = 59.0
+offset_bottom = 384.0
+text = "Reset"
+script = ExtResource("6_qjs3n")
+
 [node name="Weapon" type="Sprite2D" parent="."]
 position = Vector2(295, 455)
 texture = ExtResource("1_qknu3")
@@ -89,8 +98,10 @@ script = ExtResource("5_mqyix")
 visible = false
 script = ExtResource("2_2vx0f")
 
-[node name="Sprite2D" type="Sprite2D" parent="Target"]
+[node name="DefaultSprite" type="Sprite2D" parent="Target"]
 texture = ExtResource("1_8lvey")
+
+[node name="CurrentSprite" type="Sprite2D" parent="Target"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
 shape = SubResource("RectangleShape2D_jje8v")
@@ -249,6 +260,7 @@ text = "Change Target Image"
 
 [node name="UploadDialog" type="Panel" parent="."]
 unique_name_in_owner = true
+visible = false
 offset_right = 630.0
 offset_bottom = 500.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_2pto4")
