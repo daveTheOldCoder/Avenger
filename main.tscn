@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://bv1tjp7uwnd2t"]
+[gd_scene load_steps=29 format=3 uid="uid://bv1tjp7uwnd2t"]
 
 [ext_resource type="Texture2D" uid="uid://jk4esamjqqta" path="res://icon.svg" id="1_8lvey"]
 [ext_resource type="Texture2D" uid="uid://buf6s6at56ar2" path="res://assets/outline_panorama_vertical_select_black_48dp.png" id="1_qknu3"]
 [ext_resource type="Script" path="res://target.gd" id="2_2vx0f"]
 [ext_resource type="Script" path="res://weapon.gd" id="3_4qij8"]
+[ext_resource type="Script" path="res://load_button.gd" id="3_d8hm3"]
 [ext_resource type="Script" path="res://url_button.gd" id="3_vpnul"]
 [ext_resource type="Script" path="res://file_button.gd" id="4_evac5"]
 [ext_resource type="AudioStream" uid="uid://c1u117i2oixcw" path="res://assets/bullet_impact_22.wav" id="4_kkmm3"]
@@ -22,6 +23,7 @@
 [ext_resource type="Script" path="res://file_dialog.gd" id="18_shnka"]
 [ext_resource type="Script" path="res://url_dialog.gd" id="19_tuk5x"]
 [ext_resource type="Script" path="res://upload_dialog.gd" id="20_1j3np"]
+[ext_resource type="Script" path="res://load_dialog.gd" id="21_18v5i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jje8v"]
 size = Vector2(128, 128)
@@ -29,9 +31,9 @@ size = Vector2(128, 128)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycbnv"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_memin"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2pto4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_memin"]
 
 [node name="Main" type="Node"]
 
@@ -51,37 +53,13 @@ offset_bottom = 494.0
 text = "Credits"
 script = ExtResource("15_li4kt")
 
-[node name="URLButon" type="Button" parent="."]
-offset_left = 121.0
+[node name="LoadButon" type="Button" parent="."]
+offset_left = 84.0
 offset_top = 463.0
-offset_right = 160.0
+offset_right = 236.0
 offset_bottom = 494.0
-text = "URL"
-script = ExtResource("3_vpnul")
-
-[node name="UploadButton" type="Button" parent="."]
-offset_left = 175.0
-offset_top = 464.0
-offset_right = 239.0
-offset_bottom = 495.0
-text = "Upload"
-script = ExtResource("4_n271t")
-
-[node name="FileButton" type="Button" parent="."]
-offset_left = 75.0
-offset_top = 463.0
-offset_right = 110.0
-offset_bottom = 494.0
-text = "File"
-script = ExtResource("4_evac5")
-
-[node name="ResetButton" type="Button" parent="."]
-offset_left = 8.0
-offset_top = 353.0
-offset_right = 59.0
-offset_bottom = 384.0
-text = "Reset"
-script = ExtResource("6_qjs3n")
+text = "Load Target Image"
+script = ExtResource("3_d8hm3")
 
 [node name="Weapon" type="Sprite2D" parent="."]
 position = Vector2(295, 455)
@@ -177,6 +155,84 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 2
 script = ExtResource("16_br7ys")
+
+[node name="LoadDialog" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_right = 630.0
+offset_bottom = 500.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_2pto4")
+script = ExtResource("21_18v5i")
+
+[node name="UploadButton" type="Button" parent="LoadDialog"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -455.0
+offset_top = 28.0
+offset_right = -339.0
+offset_bottom = 59.0
+grow_horizontal = 0
+scale = Vector2(2, 2)
+text = "Upload Target Image"
+alignment = 0
+script = ExtResource("4_n271t")
+
+[node name="FileButton" type="Button" parent="LoadDialog"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -455.0
+offset_top = 125.0
+offset_right = -339.0
+offset_bottom = 156.0
+grow_horizontal = 0
+scale = Vector2(2, 2)
+text = "Load Target Image From File"
+alignment = 0
+script = ExtResource("4_evac5")
+
+[node name="UrlButton" type="Button" parent="LoadDialog"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -455.0
+offset_top = 216.0
+offset_right = -339.0
+offset_bottom = 247.0
+grow_horizontal = 0
+scale = Vector2(2, 2)
+text = "Download Target Image From URL"
+alignment = 0
+script = ExtResource("3_vpnul")
+
+[node name="ResetButton" type="Button" parent="LoadDialog"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -455.0
+offset_top = 310.0
+offset_right = -339.0
+offset_bottom = 341.0
+grow_horizontal = 0
+scale = Vector2(2, 2)
+text = "Reset Target Image"
+alignment = 0
+script = ExtResource("6_qjs3n")
+
+[node name="CancelButton" type="Button" parent="LoadDialog"]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 427.0
+offset_right = 280.0
+offset_bottom = 458.0
+scale = Vector2(2, 2)
+text = "Cancel"
+alignment = 0
 
 [node name="FileDialog" type="FileDialog" parent="."]
 unique_name_in_owner = true
