@@ -14,8 +14,7 @@ const MIN_DB: float = -60.0
 const MAX_DB: float = 0.0
 
 const SAVE_PATH: String = "user://volume.dat"
-const KEY: String =\
-		"b9a374181362fc5af06ab5e0508d8ea8a8676bdc10f3629dfa5f109b7fe2478a"
+const KEY: String = "1mKzaj7YBFlQCyiwE8CvZJmTfxKJtCEw"
 
 
 func _ready() -> void:
