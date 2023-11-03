@@ -2,8 +2,7 @@ extends CharacterBody2D
 
 const SPEED: float = 500.0
 
-const SAVE_PATH: String = "user://saved_image.dat"
-const TYPE_HINT: String = "Image"
+const SAVE_PATH: String = "user://image.dat"
 
 @onready var left_limit: Vector2 = $LeftLimit.position
 @onready var right_limit: Vector2 = $RightLimit.position
