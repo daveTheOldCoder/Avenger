@@ -83,6 +83,8 @@ func _on_target_changed(t: ImageTexture) -> void:
 
 func _on_target_reset() -> void:
 	current_sprite.texture = default_sprite.texture
+	# Save the default image, in case DirAccess.remove_absolute() fails.
+	current_sprite.texture.get_image().save_webp(SAVE_PATH)
 	DirAccess.remove_absolute(SAVE_PATH)
 
 
