@@ -27,8 +27,7 @@ func _ready() -> void:
 func _on_visibility_changed() -> void:
 	if visible:
 		print_debug("showing")
-		#test - keep button enabled for testing.
-		#upload_button.disabled = (OS.get_name() != "Web")
+		upload_button.disabled = (OS.get_name() != "Web")
 
 
 func _on_button_pressed() -> void:
