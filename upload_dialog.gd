@@ -42,7 +42,6 @@ func _ready() -> void:
 
 func _on_visibility_changed() -> void:
 	if visible:
-		print_debug("showing")
 		preview.texture = null
 		message.text = "Uploaded image will be resized to %d x %d pixels."\
 				% [preview_frame.size.x, preview_frame.size.y]
@@ -53,7 +52,6 @@ func _on_visibility_changed() -> void:
 
 
 func _hide() -> void:
-	print_debug("hiding")
 	message_flasher.stop()
 	hide()
 

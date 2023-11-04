@@ -61,7 +61,6 @@ func _ready() -> void:
 
 func _on_visibility_changed() -> void:
 	if visible:
-		print_debug("showing")
 		url.text = ""
 		url_btn.disabled = true
 		preview.texture = null
@@ -71,7 +70,6 @@ func _on_visibility_changed() -> void:
 
 
 func _on_hide() -> void:
-	print_debug("hiding")
 	http_request.cancel_request()
 	message_flasher.stop()
 

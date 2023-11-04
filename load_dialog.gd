@@ -26,7 +26,6 @@ func _ready() -> void:
 
 func _on_visibility_changed() -> void:
 	if visible:
-		print_debug("showing")
 		upload_button.disabled = (OS.get_name() != "Web")
 
 
