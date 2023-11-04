@@ -45,7 +45,7 @@ mouse_filter = 2
 texture = ExtResource("1_8lvey")
 stretch_mode = 1
 
-[node name="ShowCredits" type="Button" parent="."]
+[node name="CreditsButton" type="Button" parent="."]
 offset_left = 2.0
 offset_top = 463.0
 offset_right = 65.0

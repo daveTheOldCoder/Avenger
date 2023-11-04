@@ -4,4 +4,4 @@ extends Button
 
 func _ready():
 	focus_mode = Control.FOCUS_NONE
-	pressed.connect(func(): dialog._on_visibility_changed(); dialog.show())
+	pressed.connect(func(): dialog.show())

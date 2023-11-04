@@ -1,6 +1,6 @@
 extends Button
 
-@onready var dialog: Window = $%CreditsDialog
+@onready var dialog: Window = %CreditsDialog
 
 
 func _ready():

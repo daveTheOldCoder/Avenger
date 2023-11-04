@@ -1,6 +1,6 @@
 extends Button
 
-@onready var file_dialog: Window = $%FileDialog
+@onready var file_dialog: Window = %FileDialog
 
 func _ready():
 	focus_mode = Control.FOCUS_NONE
