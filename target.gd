@@ -83,8 +83,15 @@ func _on_target_changed(t: ImageTexture) -> void:
 
 func _on_target_reset() -> void:
 	current_sprite.texture = default_sprite.texture
-	# Save the default image, in case DirAccess.remove_absolute() fails.
+
+	# Save the image, in case DirAccess.remove_absolute() fails.
+	# I found this necessary on an HTML5 export to itch.io, since
+	# DirAccess.remove_absolute() was apparently failing to delete the saved
+	# file. Doing this only when remove_absolute() returns an error didn't work,
+	# so it's done unconditionally.
+	# TODO: Investigate further.
 	current_sprite.texture.get_image().save_webp(SAVE_PATH)
+
 	DirAccess.remove_absolute(SAVE_PATH)
 
 
